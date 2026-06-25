@@ -439,3 +439,21 @@ Frontend Dashboard
 **Machine Learning:** Random Forest (Planned), XGBoost (Comparison), LSTM (Optional)
 
 **Status:** Backend Complete – Ready for Machine Learning Integration
+
+
+how to run backend 
+bash :
+
+pip install -r requirements.txt
+
+then 
+python -m venv venv
+
+then 
+venv\Scripts\activate
+
+then 
+uvicorn app.main:app --reload
+
+refer this url 
+http://127.0.0.1:8000/docs
