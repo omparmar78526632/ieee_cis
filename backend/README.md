@@ -1,0 +1,441 @@
+# 🌞 AI-Based Solar Power Generation Prediction and Decision Support System
+
+## Backend Documentation
+
+---
+
+# 📌 Project Overview
+
+This project aims to develop an **AI-based Decision Support System** for predicting solar power generation using weather conditions and historical solar plant data.
+
+The backend is developed using **FastAPI** and provides REST APIs for dataset management, analytics, prediction, decision support, and prediction history.
+
+The system is designed in a modular architecture so that trained Machine Learning models can be integrated without changing the API structure.
+
+---
+
+# 🛠 Technology Stack
+
+| Technology         | Purpose               |
+| ------------------ | --------------------- |
+| FastAPI            | REST API Framework    |
+| Python 3.13        | Programming Language  |
+| SQLAlchemy         | ORM                   |
+| SQLite             | Database              |
+| Pandas             | Data Processing       |
+| NumPy              | Numerical Computation |
+| Joblib             | Model Loading         |
+| TensorFlow / Keras | LSTM Model Loading    |
+| Uvicorn            | ASGI Server           |
+| Swagger UI         | API Documentation     |
+
+---
+
+# 📂 Backend Architecture
+
+```
+Client
+   │
+   ▼
+FastAPI
+   │
+   ├── Dataset APIs
+   ├── Analytics APIs
+   ├── Prediction APIs
+   ├── Decision Support APIs
+   ├── Prediction History APIs
+   │
+   ▼
+SQLite Database
+```
+
+---
+
+# 📁 Project Structure
+
+```
+backend/
+│
+├── app/
+│   ├── routes/
+│   │      ├── dataset.py
+│   │      ├── analytics.py
+│   │      ├── prediction.py
+│   │      └── decision.py
+│   │
+│   ├── services/
+│   │      ├── data_service.py
+│   │      ├── analytics_service.py
+│   │      ├── prediction_service.py
+│   │      ├── history_service.py
+│   │      ├── decision_service.py
+│   │      └── model_loader.py
+│   │
+│   ├── models.py
+│   ├── schemas.py
+│   ├── database.py
+│   ├── config.py
+│   └── main.py
+│
+├── logs/
+│
+├── trained_models/
+│
+├── requirements.txt
+│
+└── README.md
+```
+
+---
+
+# 📊 Dataset Information
+
+### Dataset Sources
+
+### 1. Solar Plant Dataset (Kaggle)
+
+Contains:
+
+* DC Power
+* AC Power
+* Daily Yield
+* Total Yield
+* Ambient Temperature
+* Module Temperature
+* Irradiation
+
+### 2. NASA POWER Dataset
+
+Contains:
+
+* Air Temperature (T2M)
+* Relative Humidity (RH2M)
+* Atmospheric Pressure (PS)
+* Wind Speed (WS10M)
+* Solar Radiation (ALLSKY_SFC_SW_DWN)
+* Rainfall (PRECTOTCORR)
+
+---
+
+# 📈 Final Dataset
+
+The merged dataset contains **136,472 records** and **22 columns**.
+
+### Features
+
+* DATE_TIME
+* PLANT_ID
+* INVERTER_ID
+* DC_POWER
+* AC_POWER
+* DAILY_YIELD
+* TOTAL_YIELD
+* WEATHER_SENSOR_ID
+* AMBIENT_TEMPERATURE
+* MODULE_TEMPERATURE
+* IRRADIATION
+* ALLSKY_SFC_SW_DWN
+* T2M
+* PS
+* RH2M
+* PRECTOTCORR
+* WS10M
+* Hour
+* Day
+* Month
+* DayOfWeek
+* Week
+
+---
+
+# 🎯 Target Variable
+
+The Machine Learning model predicts:
+
+```
+DC_POWER
+```
+
+---
+
+# 📥 Current API Input
+
+The Prediction API currently accepts:
+
+```json
+{
+  "temperature": 31.5,
+  "humidity": 65,
+  "pressure": 93.8,
+  "wind_speed": 4.2,
+  "irradiation": 850
+}
+```
+
+### Input Features
+
+| Feature     | Description          |
+| ----------- | -------------------- |
+| temperature | Air Temperature      |
+| humidity    | Relative Humidity    |
+| pressure    | Atmospheric Pressure |
+| wind_speed  | Wind Speed           |
+| irradiation | Solar Irradiation    |
+
+---
+
+# 📤 Prediction Output
+
+```json
+{
+    "predicted_power": 650.42,
+    "confidence": 96.45,
+    "model": "Random Forest (Demo)",
+    "status": "Prediction Successful"
+}
+```
+
+---
+
+# 🤖 Decision Support Output
+
+```json
+{
+    "predicted_power":620,
+    "efficiency":"Good",
+    "recommendations":[
+        "Weather conditions are favorable."
+    ]
+}
+```
+
+---
+
+# 🌐 Available REST APIs
+
+## Dataset APIs
+
+| Method | Endpoint            | Description         |
+| ------ | ------------------- | ------------------- |
+| GET    | /dataset/info       | Dataset Information |
+| GET    | /dataset/statistics | Dataset Statistics  |
+
+---
+
+## Analytics APIs
+
+| Method | Endpoint                       | Description        |
+| ------ | ------------------------------ | ------------------ |
+| GET    | /analytics/summary             | Dataset Summary    |
+| GET    | /analytics/columns             | Numeric Columns    |
+| GET    | /analytics/correlation         | Correlation Matrix |
+| GET    | /analytics/statistics/{column} | Feature Statistics |
+
+---
+
+## Prediction APIs
+
+| Method | Endpoint                 | Description         |
+| ------ | ------------------------ | ------------------- |
+| POST   | /prediction/predict      | Predict Solar Power |
+| GET    | /prediction/history      | Prediction History  |
+| DELETE | /prediction/history/{id} | Delete Prediction   |
+
+---
+
+## Decision Support APIs
+
+| Method | Endpoint            | Description              |
+| ------ | ------------------- | ------------------------ |
+| POST   | /decision/recommend | Generate Recommendations |
+
+---
+
+# 💾 Database
+
+SQLite Database
+
+Table:
+
+```
+prediction_history
+```
+
+Stores:
+
+* Prediction ID
+* Timestamp
+* Temperature
+* Humidity
+* Pressure
+* Wind Speed
+* Irradiation
+* Predicted Power
+* Confidence
+* Model Name
+
+---
+
+# 📝 Logging
+
+The backend records:
+
+* API Requests
+* Prediction Logs
+* Dataset Loading
+* Errors
+
+Log File:
+
+```
+logs/app.log
+```
+
+---
+
+# 📖 API Documentation
+
+Swagger UI
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# ✅ Completed Features
+
+* FastAPI Backend
+* Modular Architecture
+* SQLite Database
+* SQLAlchemy ORM
+* Dataset Management APIs
+* Analytics APIs
+* Prediction APIs
+* Prediction History
+* Decision Support Module
+* Logging
+* Swagger Documentation
+* Model Loader Structure
+
+---
+
+# 🚧 Remaining Work
+
+## Machine Learning
+
+* Exploratory Data Analysis (EDA)
+* Feature Selection
+* Feature Scaling
+* Model Training
+* Model Comparison
+
+Models to Evaluate:
+
+* Random Forest
+* XGBoost
+* LightGBM
+* CatBoost
+* LSTM (Optional)
+
+---
+
+## Model Evaluation
+
+Performance Metrics:
+
+* MAE
+* RMSE
+* R² Score
+* MAPE
+
+---
+
+## Model Deployment
+
+* Save trained Random Forest model (.pkl)
+* Save Scaler (.pkl)
+* Replace demo prediction logic
+* Integrate trained model into FastAPI
+
+---
+
+# 🔄 Current Workflow
+
+```
+Weather Input
+        │
+        ▼
+Prediction API
+        │
+        ▼
+Prediction Service
+        │
+        ▼
+(Random Prediction - Temporary)
+        │
+        ▼
+Decision Support
+        │
+        ▼
+Prediction History
+        │
+        ▼
+SQLite Database
+```
+
+---
+
+# 🚀 Future Workflow
+
+```
+Weather Input
+        │
+        ▼
+Random Forest Model
+        │
+        ▼
+Solar Power Prediction
+        │
+        ▼
+Decision Support Engine
+        │
+        ▼
+Prediction History
+        │
+        ▼
+SQLite Database
+        │
+        ▼
+Frontend Dashboard
+```
+
+---
+
+# 📌 Current Project Status
+
+| Module                 | Status        |
+| ---------------------- | ------------- |
+| Backend Development    | ✅ Completed   |
+| Dataset Preparation    | ✅ Completed   |
+| Data Cleaning          | ✅ Completed   |
+| Feature Engineering    | ✅ Completed   |
+| API Development        | ✅ Completed   |
+| Database Integration   | ✅ Completed   |
+| Machine Learning Model | ⏳ In Progress |
+| Model Deployment       | ⏳ Pending     |
+| Frontend Integration   | ⏳ Pending     |
+
+---
+
+# 👨‍💻 Developer
+
+**Project:** AI-Based Solar Power Generation Prediction and Decision Support System
+
+**Backend Framework:** FastAPI
+
+**Database:** SQLite
+
+**Machine Learning:** Random Forest (Planned), XGBoost (Comparison), LSTM (Optional)
+
+**Status:** Backend Complete – Ready for Machine Learning Integration
