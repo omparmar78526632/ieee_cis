@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+
+# Virtual environments
+venv/
+env/
+.env/
+*.env
+
+# Databases (local dev only)
+*.db
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# ML model files (large binaries - add back if you want to track them)
+# *.pkl
+# *.joblib
+# *.h5
+# *.pt
+# *.pth
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
