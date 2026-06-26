@@ -9,3 +9,7 @@
 2026-06-25 18:26:49,604 | INFO | Solar Generation Prediction API Started
 2026-06-25 18:28:58,110 | INFO | Solar Generation Prediction API Started
 2026-06-25 18:54:06,191 | INFO | Solar Generation Prediction API Started
+2026-06-25 20:12:43,471 | INFO | Solar Generation Prediction API Started
+2026-06-25 20:13:15,183 | INFO | Prediction | Power=10667.92W | Confidence=95.0% | Model=Trained ML Model
+2026-06-25 20:13:15,286 | INFO | Prediction | Power=0.0W | Confidence=95.0% | Model=Trained ML Model
+2026-06-25 20:18:54,104 | INFO | Prediction | Power=10667.92W | Confidence=95.0% | Model=Trained ML Model
