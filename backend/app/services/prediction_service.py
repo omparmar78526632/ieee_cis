@@ -10,7 +10,7 @@ class PredictionService:
     def predict(data):
 
         """
-        Predict DC power output from weather inputs.
+        Predict AC power output from weather inputs.
 
         Features (order must match training):
             [AMBIENT_TEMPERATURE, RH2M, PS, WS10M, IRRADIATION]
@@ -51,7 +51,7 @@ class PredictionService:
             # ── Fallback: model not loaded ────────────────────────
             logger.warning("ML model not loaded — using irradiation-based estimate")
 
-            # Physics-based fallback: DC_POWER ≈ irradiation * area * efficiency
+            # Physics-based fallback: AC_POWER estimation ≈ irradiation * area * efficiency
             # Using typical 1kW panel params as rough estimate
             prediction = round(max(0.0, data.irradiation * 8500), 2)
             confidence = 60.0

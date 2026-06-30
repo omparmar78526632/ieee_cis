@@ -20,6 +20,9 @@ env/
 *.log
 logs/
 
+# Zip archives
+*.zip
+
 # ML model files (large binaries - add back if you want to track them)
 # *.pkl
 # *.joblib
